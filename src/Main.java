@@ -24,15 +24,15 @@ public class Main {
         List<String> recruits = persons.stream()
                 .filter(person -> person.getAge() >= 18 && person.getAge() <= 27)
                 .filter(person -> person.getSex().equals(Sex.MAN))
-                .map(person -> person.getName())
+                .map(person -> person.toString())
                 .collect(Collectors.toList());
         System.out.println("Лица призивного возраста: " + recruits);
         List<String> operable = persons.stream()
                 .filter(person -> person.getEducation().equals(Education.HIGHER))
-                .filter(person -> person.getSex().equals(Sex.MAN) && person.getAge() >= 18 && person.getAge() < 65)
-                .filter(person -> person.getSex().equals(Sex.WOMAN) && person.getAge() >= 18 && person.getAge() < 60)
-                .sorted(Comparator.comparing(Person::getName))
-                .map(person -> person.getName())
+                .filter(person -> (person.getSex().equals(Sex.MAN) && person.getAge() >= 18 && person.getAge() < 65)
+                        || (person.getSex().equals(Sex.WOMAN) && person.getAge() >= 18 && person.getAge() < 60))
+                .sorted(Comparator.comparing(Person::getFamily))
+                .map(person -> person.toString())
                 .collect(Collectors.toList());
 
         System.out.println("Лица трудоспособного возраста: " + operable);
